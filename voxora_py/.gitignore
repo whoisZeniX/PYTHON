@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+onnx/model_int8.onnx
+data/raw/
+static/app.css
+screenshots/_*/

@@ -1,0 +1,23 @@
+{% from "partials/history_list.html" import history_list %}
+<div
+  id="history-drawer"
+  class="fixed top-0 right-0 h-full w-80 bg-brand-panel border-l-4 border-brand-border transform transition-transform duration-300 z-50 brutal-shadow translate-x-full"
+>
+  <div class="flex flex-col h-full relative">
+    <button
+      id="history-close"
+      hidden
+      class="absolute -left-12 top-4 bg-brand-panel border-y-4 border-l-4 border-brand-border w-12 h-12 flex items-center justify-center hover:bg-brand-bg z-50 text-brand-text"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+
+    <div class="p-6 border-b-4 border-brand-border bg-brand-bg text-brand-text">
+      <h2 class="text-xl font-black uppercase tracking-widest font-mono">Session History</h2>
+    </div>
+
+    {{ history_list(history, page) }}
+  </div>
+</div>

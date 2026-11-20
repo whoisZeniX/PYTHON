@@ -1,0 +1,15 @@
+{
+  "algorithm": "BM25Okapi",
+  "corpus_count": 200,
+  "k1": 1.5,
+  "b": 0.75,
+  "source_corpus": "/Users/baqarmustafa/RAG 001/voxora/data/processed/dev_corpus.parquet",
+  "creation_timestamp": "2026-09-24T18:15:03.904152",
+  "file_size_bytes": 10325,
+  "memory_metrics": {
+    "memory_before_mb": 53.22,
+    "memory_after_mb": 111.11,
+    "memory_delta_mb": 57.89
+  },
+  "build_time_s": 0.4596
+}

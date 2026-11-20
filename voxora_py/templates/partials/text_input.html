@@ -1,0 +1,33 @@
+{% from "partials/query_input.html" import query_input %}
+<div
+  id="text-input"
+  class="w-full max-w-2xl mx-auto flex flex-col gap-4 mt-8 relative z-10"
+  hx-target="#results-area"
+  hx-swap="innerHTML"
+  hx-indicator="#text-input, #results-area"
+  hx-disabled-elt="#text-input input, #text-input button"
+>
+  <form class="flex gap-2" hx-post="/ui/query" hx-trigger="submit[target.query.value.trim().length > 0]">
+    {{ query_input() }}
+    <button
+      type="submit"
+      class="bg-brand-primary text-white brutal-border brutal-shadow brutal-shadow-hover px-8 py-4 font-black uppercase tracking-widest disabled:opacity-50 disabled:cursor-not-allowed peer-placeholder-shown:opacity-50 peer-placeholder-shown:cursor-not-allowed"
+    ><span class="in-[.htmx-request]:hidden">Search</span><span class="hidden in-[.htmx-request]:inline">Processing...</span></button>
+  </form>
+
+  <div class="flex flex-wrap gap-2 mt-4 justify-center">
+    <span class="text-sm font-bold font-mono text-brand-muted uppercase tracking-wider mr-2 self-center">
+      Try asking:
+    </span>
+    {% for q in suggestions %}
+    <button
+      type="button"
+      hx-post="/ui/query"
+      hx-vals='{{ {"query": q, "source": "chip"} | tojson }}'
+      class="text-xs bg-brand-bg brutal-border brutal-shadow-hover px-3 py-1 font-bold font-mono text-brand-text hover:bg-yellow-200 transition-colors disabled:opacity-50"
+    >
+      {{ q }}
+    </button>
+    {% endfor %}
+  </div>
+</div>

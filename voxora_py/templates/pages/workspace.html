@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "partials/hero.html" %}
+
+<div class="flex flex-col items-center justify-center mt-12 w-full max-w-3xl mx-auto gap-8">
+  {% include "partials/text_input.html" %}
+
+  <div class="w-full text-center relative flex items-center justify-center before:content-[''] before:absolute before:h-[4px] before:w-full before:bg-brand-border before:z-0">
+    <span class="bg-brand-bg brutal-border px-6 py-2 font-mono font-black text-brand-text uppercase tracking-widest text-lg relative z-10">
+      OR
+    </span>
+  </div>
+
+  {% include "partials/microphone.html" %}
+</div>
+
+<div id="results-area" class="space-y-16 empty:-mt-16 [&.htmx-request]:-mt-16 [&.htmx-request>*]:hidden">{% include "partials/result_area.html" %}</div>
+{% endblock %}
+
+{% block fab %}
+<button
+  id="history-fab"
+  class="fixed bottom-8 right-8 bg-brand-primary text-white brutal-border brutal-shadow brutal-shadow-hover p-4 z-40 group"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+</button>
+<template id="error-template">{% with error="" %}{% include "partials/error.html" %}{% endwith %}</template>
+{% endblock %}

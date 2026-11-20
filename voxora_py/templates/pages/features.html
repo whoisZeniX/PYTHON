@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="animate-in fade-in zoom-in duration-300 relative z-10 px-4 pb-20">
+  <div class="text-center mb-16">
+    <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-brand-text mb-4">
+      Core <span class="text-brand-primary">Features</span>
+    </h1>
+    <p class="text-xl font-bold font-mono text-brand-muted max-w-2xl mx-auto uppercase">
+      The technical architecture powering Voxora Intelligence.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    {% for f in features %}
+    <div class="bg-brand-panel brutal-border brutal-shadow p-8 flex flex-col hover:-translate-y-2 transition-transform">
+      <div class="w-16 h-16 {{ f.color }} brutal-border flex items-center justify-center text-3xl mb-6 text-black">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="{{ f.icon }}" />
+        </svg>
+      </div>
+      <h3 class="text-2xl font-black uppercase tracking-tight text-brand-text mb-4">
+        {{ f.title }}
+      </h3>
+      <p class="text-lg font-medium text-brand-muted leading-relaxed">
+        {{ f.desc }}
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

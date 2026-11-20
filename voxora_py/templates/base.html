@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"{% if dark %} class="dark"{% endif %}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Voxora AI</title>
+    <link rel="stylesheet" href="/static/app.css?v={{ css_version }}">
+    <meta name="htmx-config" content='{"responseHandling":[{"code":"204","swap":false},{"code":"...","swap":true}]}'>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.4/dist/htmx.min.js"></script>
+    <script src="/static/app.js" defer></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="min-h-screen py-8 px-4 sm:px-8 lg:px-16 max-w-[1400px] mx-auto bg-brand-bg relative overflow-hidden selection:bg-brand-primary selection:text-white transition-colors duration-300">
+        <div class="absolute top-40 left-10 w-24 h-24 bg-brand-primary brutal-border brutal-shadow rotate-12 opacity-10 pointer-events-none hidden md:block"></div>
+        <div class="absolute bottom-40 right-10 w-32 h-32 bg-brand-panel brutal-border brutal-shadow -rotate-6 opacity-20 pointer-events-none hidden md:block"></div>
+
+        <main class="space-y-16 relative z-10">
+          {% include "partials/navbar.html" %}
+          {% block content %}{% endblock %}
+        </main>
+
+        {% include "partials/history_drawer.html" %}
+        {% block fab %}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

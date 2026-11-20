@@ -1,0 +1,11 @@
+{% macro query_input(value="", oob=false) -%}
+<input
+  id="query-input"
+  type="text"
+  name="query"
+  value="{{ value }}"
+  {% if oob %}hx-swap-oob="true"{% endif %}
+  placeholder="Type a question and search..."
+  class="peer flex-1 bg-brand-panel brutal-border brutal-shadow p-4 text-xl font-bold font-mono text-brand-text placeholder-brand-muted focus:outline-none focus:ring-4 focus:ring-brand-primary disabled:opacity-50"
+/>
+{% endmacro %}

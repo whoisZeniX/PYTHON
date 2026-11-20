@@ -1,0 +1,123 @@
+{%- macro metric(label, value) -%}
+<div class="bg-brand-panel brutal-border brutal-shadow p-6 flex flex-col justify-between h-full">
+  <p class="text-xs uppercase tracking-widest font-black font-mono text-brand-text mb-4">
+    {{ label }}
+  </p>
+
+  <p class="text-3xl font-black text-brand-text tracking-tighter">
+    {{ "%.0f" | format(value) }} <span class="text-sm font-bold font-mono text-brand-muted ml-1">ms</span>
+  </p>
+</div>
+{%- endmacro -%}
+
+{%- macro latency_row(label, m, highlight=false) -%}
+{% if highlight %}
+<tr class="transition-colors bg-yellow-100 font-bold dark:bg-yellow-900">
+  <td class="py-4 px-6 font-black uppercase tracking-wider text-brand-text">
+    {{ label }}
+  </td>
+{% else %}
+<tr class="transition-colors hover:bg-brand-bg">
+  <td class="py-4 px-6 font-black uppercase tracking-wider text-brand-muted">
+    {{ label }}
+  </td>
+{% endif %}
+
+  <td class="py-4 px-6 text-right font-mono font-bold text-brand-text">
+    {{ "%.1f" | format(m.p50) }}
+  </td>
+
+  <td class="py-4 px-6 text-right font-mono font-bold text-brand-text">
+    {{ "%.1f" | format(m.p70) }}
+  </td>
+
+{% if highlight %}
+  <td class="py-4 px-6 text-right font-mono font-black text-brand-primary">
+{% else %}
+  <td class="py-4 px-6 text-right font-mono font-black text-brand-text">
+{% endif %}
+    {{ "%.1f" | format(m.p100) }}
+  </td>
+</tr>
+{%- endmacro -%}
+
+{%- set t = result.timings -%}
+<details class="group mt-16 mb-10">
+  <summary class="inline-flex items-center gap-3 list-none [&::-webkit-details-marker]:hidden cursor-pointer bg-brand-panel text-brand-text brutal-border brutal-shadow brutal-shadow-hover px-6 py-3 font-mono font-black text-sm uppercase tracking-widest">
+    <span class="group-open:hidden">Show timings</span>
+    <span class="hidden group-open:inline">Hide timings</span>
+  </summary>
+
+  <section class="mt-8">
+  <div class="flex items-center gap-4 mb-8 bg-brand-inverted text-brand-inverted-text p-4 brutal-shadow border-3 border-brand-border">
+    <div class="w-10 h-10 bg-brand-primary flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    </div>
+    <h3 class="text-2xl font-black uppercase tracking-widest">
+      Pipeline Telemetry
+    </h3>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    {{ metric("STT", t.stt_ms) }}
+    {{ metric("Retrieval", t.retrieval_ms) }}
+    {{ metric("Generation", t.generation_ms) }}
+    {{ metric("Grounding", t.grounding_ms) }}
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+    {{ metric("Total RAG Pipeline", t.total_rag_ms) }}
+
+    <div class="bg-brand-primary brutal-border brutal-shadow p-6 flex flex-col justify-between h-full text-white">
+      <p class="text-xs uppercase tracking-widest font-black font-mono text-white/80 mb-4">
+        End to End latency
+      </p>
+      <p class="text-4xl font-black text-white tracking-tighter">
+        {{ "%.0f" | format(t.total_e2e_ms) }} <span class="text-sm font-bold font-mono text-white/80 ml-1">ms</span>
+      </p>
+    </div>
+  </div>
+
+  {% if summary and summary.sample_count > 0 %}
+  <div class="mt-16 bg-brand-panel brutal-border brutal-shadow relative">
+    <div class="absolute -top-4 -right-4 bg-yellow-300 brutal-border px-4 py-2 font-black font-mono text-sm uppercase transform rotate-3 text-black">
+      Analytics
+    </div>
+    <div class="p-8 border-b-4 border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <h4 class="text-2xl font-black text-brand-text uppercase tracking-tighter">
+        Latency Analytics
+      </h4>
+
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-inverted text-brand-inverted-text font-mono font-bold text-xs uppercase brutal-border">
+        <span class="w-2 h-2 bg-green-400 animate-pulse"></span>
+        Samples: {{ summary.sample_count }}
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left">
+        <thead class="bg-brand-bg text-xs uppercase text-brand-text font-black font-mono border-b-4 border-brand-border">
+          <tr>
+            <th class="py-4 px-6">Pipeline Stage</th>
+            <th class="py-4 px-6 text-right">P50 (Median)</th>
+            <th class="py-4 px-6 text-right">P70</th>
+            <th class="py-4 px-6 text-right">P100 (Max)</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y-4 divide-brand-border">
+          {{ latency_row("Speech to Text", summary.stt_ms) }}
+          {{ latency_row("Document Retrieval", summary.retrieval_ms) }}
+          {{ latency_row("Answer Generation", summary.generation_ms) }}
+          {{ latency_row("Grounding Check", summary.grounding_ms) }}
+          {{ latency_row("Total RAG Pipeline", summary.total_rag_ms, highlight=true) }}
+          {{ latency_row("Total End-to-End", summary.total_e2e_ms, highlight=true) }}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+</section>
+</details>

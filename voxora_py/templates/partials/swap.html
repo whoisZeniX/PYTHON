@@ -1,0 +1,5 @@
+{%- from "partials/history_list.html" import history_list -%}
+{%- from "partials/query_input.html" import query_input -%}
+{% include "partials/result_area.html" %}
+{{ history_list(history, page, oob=true) }}
+{% if query_value %}{{ query_input(query_value, oob=true) }}{% endif %}

@@ -1,0 +1,41 @@
+<nav class="flex justify-between items-stretch bg-brand-panel brutal-border brutal-shadow mb-12 hidden md:flex">
+  <a href="/" class="border-r-3 border-brand-border p-4 flex items-center bg-brand-bg cursor-pointer">
+    <h1 class="text-xl font-black tracking-tighter uppercase text-brand-text">Voxora RAG</h1>
+  </a>
+  <div class="flex-1 flex justify-center items-center gap-8 font-mono text-sm font-bold uppercase text-brand-text">
+    {% if page == "landing" %}
+    <a href="/" class="normal-case hover:text-brand-primary transition-colors border-b-2 border-brand-primary text-brand-primary">
+      Home
+    </a>
+    {% else %}
+    <a href="/" class="normal-case hover:text-brand-primary transition-colors">
+      Home
+    </a>
+    {% endif %}
+    {% if page == "features" %}
+    <a href="/features" class="normal-case hover:text-brand-primary transition-colors border-b-2 border-brand-primary text-brand-primary">
+      Features
+    </a>
+    {% else %}
+    <a href="/features" class="normal-case hover:text-brand-primary transition-colors">
+      Features
+    </a>
+    {% endif %}
+  </div>
+  <div class="border-l-3 border-brand-border flex items-stretch">
+    <a href="/ui/theme/toggle?next={{ request.url.path | urlencode }}" class="px-4 border-r-3 border-brand-border hover:bg-brand-bg flex items-center justify-center text-brand-text">
+      {% if dark %}
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+      </svg>
+      {% else %}
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+      </svg>
+      {% endif %}
+    </a>
+    <a href="/app" class="flex items-center px-6 bg-brand-primary text-white font-black uppercase tracking-widest hover:bg-brand-primary-hover">
+      Voice Query
+    </a>
+  </div>
+</nav>

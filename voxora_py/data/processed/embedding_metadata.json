@@ -1,0 +1,23 @@
+{
+  "model_name": "intfloat/multilingual-e5-small",
+  "embedding_dimension": 384,
+  "document_count": 200,
+  "normalized": true,
+  "device": "cpu",
+  "batch_size": 32,
+  "creation_timestamp": "2026-09-24T18:14:59.892484",
+  "input_corpus": "/Users/baqarmustafa/RAG 001/voxora/data/processed/dev_corpus.parquet",
+  "output_embedding_file": "/Users/baqarmustafa/RAG 001/voxora/data/processed/dev_embeddings.npy",
+  "file_size_bytes": 307328,
+  "memory_metrics": {
+    "memory_before_mb": 513.92,
+    "memory_after_model_load_mb": 964.91,
+    "memory_after_embedding_mb": 1054.77,
+    "memory_delta_mb": 540.84
+  },
+  "timing_metrics": {
+    "model_load_time_ms": 2305.52,
+    "embedding_time_ms": 553.29,
+    "total_time_ms": 2858.81
+  }
+}
