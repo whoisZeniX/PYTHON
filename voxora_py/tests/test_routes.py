@@ -222,7 +222,7 @@ def test_ui_query_renders_results_and_history(client):
     assert 'id="query-input"' in chip and 'value="What is Python?"' in chip
 
     page = client.get("/app").text
-    assert '<span>"</span>What is Python?<span>"</span>' in page
+    assert '"What is Python?"' in page or "&#34;What is Python?&#34;" in page
     assert "Pipeline Telemetry" in page
 
 

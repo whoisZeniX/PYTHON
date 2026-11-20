@@ -5,4 +5,3 @@ __pycache__/
 onnx/model_int8.onnx
 data/raw/
 static/app.css
-screenshots/_*/

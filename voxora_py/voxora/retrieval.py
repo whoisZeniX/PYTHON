@@ -70,12 +70,12 @@ class Retriever:
         self,
         embedder,
         faiss_index: faiss.Index,
+        faiss_en_index: faiss.Index,
         bm25: BM25Index,
         corpus: list[dict[str, Any]],
         search_top_k: int = 10,
         final_top_k: int = 5,
         min_dense_score: float = 0.30,
-        faiss_en_index: faiss.Index,
     ):
         self.embedder = embedder
         self.faiss_index = faiss_index

@@ -18,4 +18,3 @@ pytailwindcss
 pytest
 httpx
 playwright
-pillow

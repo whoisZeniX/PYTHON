@@ -59,12 +59,12 @@ def load_services(settings: Settings | None = None) -> Services:
     retriever = Retriever(
         embedder,
         faiss_index,
+        faiss_en_index,
         bm25,
         corpus,
         search_top_k=settings.search_top_k,
         final_top_k=settings.final_top_k,
         min_dense_score=settings.min_dense_score,
-        faiss_en_index=faiss_en_index,
     )
     generator = GroqGenerator(
         settings.groq_api_key,

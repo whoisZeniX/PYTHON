@@ -35,7 +35,7 @@ def make_retriever(query_vector, min_dense_score=0.30):
     index = faiss.IndexFlatIP(4)
     index.add(VECTORS)
     bm25 = BM25Index.build([d["text"] for d in CORPUS])
-    return Retriever(StubEmbedder(query_vector), index, bm25, CORPUS, min_dense_score=min_dense_score)
+    return Retriever(StubEmbedder(query_vector), index, index, bm25, CORPUS, min_dense_score=min_dense_score)
 
 
 def test_tokenize_strips_ascii_and_indic_punctuation():
